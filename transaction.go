@@ -234,6 +234,9 @@ func (tx *Transaction) End() {
 	if tx.ended() {
 		return
 	}
+	if !tx.Sampled() {
+		return
+	}
 	if tx.Duration < 0 {
 		tx.Duration = time.Since(tx.timestamp)
 	}

@@ -838,9 +838,6 @@ func (t *Tracer) loop() {
 		case event := <-t.events:
 			switch event.eventType {
 			case transactionEvent:
-				if !event.tx.traceContext.Options.Recorded() {
-					continue
-				}
 				if !t.breakdownMetrics.recordTransaction(event.tx.TransactionData) {
 					if !breakdownMetricsLimitWarningLogged && cfg.logger != nil {
 						cfg.logger.Warningf("%s", breakdownMetricsLimitWarning)
